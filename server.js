@@ -20,8 +20,9 @@ fetch('https://api.mixmax.com/v1/contacts', {
     }
 }).then(res => res.json())
 .then(json => {
-    console.log("Email :",json.results[0].email);
-	console.log(json);
+    for (var i in json.results){
+    console.log(i+" : ",json.results[i].email);}
+	//console.log(json);
 })
 .catch(err => {
   console.error(err);
