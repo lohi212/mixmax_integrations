@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 const conString = "postgres://gunazoip:nHADdQIwNuCkkPX84tlN8kg3mYlaK0Ad@suleiman.db.elephantsql.com:5432/gunazoip" //Can be found in the Details page
 const pgClient = new pg.Client(conString);
-let ID,UserId , from_mail,to_email,to_name,cc_email,cc_name,subject,mailbody,eventt;
+let ID,UserId , from_mail,to_email,to_name,cc_email,cc_name,subject=null,mailbody,eventt;
 pgClient.connect(function(err) {
   console.log('connection successfull');
 });
@@ -19,15 +19,15 @@ app.get('/', (req, res) => {
 });
 
 app.post('/demo-hook', (req, res) => {
-	//console.log(req.body);
+	console.log(req.body);
 	ID=req.body.id;
 	UserId=req.body.userId;
 	to_email=req.body.to[0].email;
 	to_name=req.body.to[0].name;
 	from_email=req.body.from.email;
 	from_name=req.body.from.name;
-	if(req.body.subject)
-	subject=req.body.subject;
+	if(req.body.subject){
+	subject=req.body.subject;}
 	eventt=req.body.eventName;
 	mailbody=req.body.plaintextBody;
 	
